@@ -1,0 +1,25 @@
+{
+    "liveServer.settings.root": "/dist",
+    "files.exclude": {
+        "**/.bloop": true,
+        "**/.bsp": true,
+        "**/.metals": true,
+        "**/.scala-build": true,
+        "**/node_modules": true,
+        "**/target": false,
+        "project/project": true,
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true
+    },
+    "files.watcherExclude": {
+        "**/target": true
+    },
+    "cSpell.words": [
+        "scalajs",
+        "vite"
+    ],
+}
