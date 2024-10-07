@@ -1,9 +1,32 @@
 import org.scalajs.linker.interface.ModuleSplitStyle
 
-lazy val aoc2024 = project
+Global / lintUnusedKeysOnLoad := false
+run / javaOptions += "-Dfile.encoding=UTF-8"
+outputStrategy := Some(StdoutOutput)
+
+addCommandAlias("solve", "aoc2024JVM/run")
+addCommandAlias("web", "~fastLinkJS")
+
+lazy val root = project
   .in(file("."))
-  .enablePlugins(ScalaJSPlugin) // Enable the Scala.js plugin in this project
+  .aggregate(aoc2024.js, aoc2024.jvm)
   .settings(
+    publish := {},
+    publishLocal := {}
+  )
+
+lazy val aoc2024 = crossProject(JSPlatform, JVMPlatform)
+  .in(file("."))
+  .settings(
+    name := "aoc2024",
+    version := "0.1-SNAPSHOT"
+  )
+  .jvmSettings(
+    libraryDependencies += "org.scala-js" %% "scalajs-stubs" % "1.1.0" % "provided",
+    scalaVersion := "3.5.1",
+    mainClass := Some("hu.sanraith.aoc2024.shell.Main")
+  )
+  .jsSettings(
     scalaVersion := "3.5.1",
 
     // Tell Scala.js that this is an application with a main method
@@ -19,7 +42,7 @@ lazy val aoc2024 = project
     scalaJSLinkerConfig ~= {
       _.withModuleKind(ModuleKind.ESModule)
         .withModuleSplitStyle(
-          ModuleSplitStyle.SmallModulesFor(List("aoc2024"))
+          ModuleSplitStyle.SmallModulesFor(List("hu.sanraith.aoc2024.web"))
         )
     },
 

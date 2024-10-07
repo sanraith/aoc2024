@@ -6,7 +6,7 @@
         "**/.metals": true,
         "**/.scala-build": true,
         "**/node_modules": true,
-        "**/target": false,
+        "**/target": true,
         "project/project": true,
         "**/.git": true,
         "**/.svn": true,
