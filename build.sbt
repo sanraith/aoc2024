@@ -22,9 +22,12 @@ lazy val aoc2024 = crossProject(JSPlatform, JVMPlatform)
     version := "0.1-SNAPSHOT"
   )
   .jvmSettings(
-    libraryDependencies += "org.scala-js" %% "scalajs-stubs" % "1.1.0" % "provided",
+    libraryDependencies ++= Seq(
+      "org.scala-js" %% "scalajs-stubs" % "1.1.0" % "provided",
+      "com.github.pureconfig" % "pureconfig_2.13" % "0.17.7"
+    ),
     scalaVersion := "3.5.1",
-    mainClass := Some("hu.sanraith.aoc2024.shell.Main")
+    mainClass := Some("hu.sanraith.aoc2024.cli.Main")
   )
   .jsSettings(
     scalaVersion := "3.5.1",
