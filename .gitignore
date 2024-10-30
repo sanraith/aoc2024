@@ -1,5 +1,7 @@
 # Advent of Code
 aoc*.config.json
+.cache/
+input/
 
 # --- Scala ---
 

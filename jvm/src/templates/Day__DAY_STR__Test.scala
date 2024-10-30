@@ -1,5 +1,4 @@
 package hu.sanraith.aoc2024.solution
-import hu.sanraith.aoc2024.SolutionTestSpec
 
 /** Tests for https://adventofcode.com/__YEAR__/day/__DAY__ */
 class Day__DAY_STR__Test extends SolutionTestSpec:

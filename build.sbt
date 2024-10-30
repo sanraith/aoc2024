@@ -4,8 +4,18 @@ Global / lintUnusedKeysOnLoad := false
 run / javaOptions += "-Dfile.encoding=UTF-8"
 outputStrategy := Some(StdoutOutput)
 
+/* --- Command aliases --- */
 addCommandAlias("solve", "aoc2024JVM/run")
+addCommandAlias("scaffold", "aoc2024JVM/run scaffold")
 addCommandAlias("web", "~fastLinkJS")
+(1 to 25).flatMap(day => // Test alias for each day: "test-1".."test-25"
+  addCommandAlias(
+    s"test-$day",
+    s"testOnly hu.sanraith.aoc2024.solution.Day${"%02d".format(day)}Test"
+  )
+)
+
+/* --- Project config --- */
 
 lazy val root = project
   .in(file("."))
@@ -23,8 +33,10 @@ lazy val aoc2024 = crossProject(JSPlatform, JVMPlatform)
   )
   .jvmSettings(
     libraryDependencies ++= Seq(
+      "com.github.pureconfig" % "pureconfig_2.13" % "0.17.7",
+      "org.jsoup" % "jsoup" % "1.18.1",
       "org.scala-js" %% "scalajs-stubs" % "1.1.0" % "provided",
-      "com.github.pureconfig" % "pureconfig_2.13" % "0.17.7"
+      "org.scalatest" %% "scalatest-funspec" % "3.2.19" % "test"
     ),
     scalaVersion := "3.5.1",
     mainClass := Some("hu.sanraith.aoc2024.cli.Main")

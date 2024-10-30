@@ -16,9 +16,7 @@ class SimpleContext(override val input: String) extends Context
 @main
 def Main(): Unit =
   val day01 = Day01()
-  println(day01.title)
   val result = day01.part2(SimpleContext("4nineeightseven2")).toString()
-  println(result)
 
   dom.document.querySelector("#app").innerHTML = s"""
     <div>
@@ -28,7 +26,7 @@ def Main(): Unit =
       <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
         <img src="$typescriptLogo" class="logo vanilla" alt="JavaScript logo" />
       </a>
-      <h1>${result}</h1>
+      <h1>Day01 result: ${result}</h1>
       <div class="card">
         <button id="counter" type="button"></button>
       </div>

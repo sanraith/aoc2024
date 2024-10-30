@@ -1,5 +1,5 @@
 // This file is auto-generated!
-// Use `run scaffold index` to force an update.
+// Use `scaffold index` to force an update.
 
 package hu.sanraith.aoc2024.solution
 
