@@ -3,6 +3,6 @@
 
 package hu.sanraith.aoc2024.solution
 
-val SolutionClasses: List[Class[?]] = List(
-  classOf[Day01]
+val SolutionDefinitions: List[SolutionInfo] = List(
+  SolutionInfo(1, () => new Day01())
 )

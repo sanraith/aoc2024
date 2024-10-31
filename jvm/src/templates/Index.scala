@@ -3,6 +3,6 @@
 
 package hu.sanraith.aoc2024.solution
 
-val SolutionClasses: List[Class[?]] = List(
+val SolutionDefinitions: List[SolutionInfo] = List(
   __SOLUTION_CLASS_LIST__
 )

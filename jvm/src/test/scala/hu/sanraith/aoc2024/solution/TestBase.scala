@@ -14,8 +14,8 @@ abstract class SolutionTestSpec extends AnyFunSpec {
     * from `input/Day<day>.txt` if no input provided.
     */
   def assertPart(
-      part: (Context) => NumberOrString,
-      expected: NumberOrString,
+      part: (Context) => WholeNumberOrString,
+      expected: WholeNumberOrString,
       input: String = null
   )(implicit solution: Solution) =
     solution.println = println
@@ -25,8 +25,8 @@ abstract class SolutionTestSpec extends AnyFunSpec {
 
   /** PENDING assert, remove "_" to make test active. */
   def _assertPart(
-      part: (Context) => NumberOrString,
-      expected: NumberOrString,
+      part: (Context) => WholeNumberOrString,
+      expected: WholeNumberOrString,
       input: String = null
   ) = pending
 

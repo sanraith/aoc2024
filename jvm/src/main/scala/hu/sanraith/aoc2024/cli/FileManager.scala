@@ -105,7 +105,14 @@ object FileManager:
 
     // Fill template with class list and save it
     val contents = TemplateFiller(template)
-      .fill("__SOLUTION_CLASS_LIST__", classNameList.map(x => s"classOf[$x]"), ",\n")
+      .fill(
+        "__SOLUTION_CLASS_LIST__",
+        classNameList.map { case className =>
+          val dayNumber = """[1-9]\d?""".r.findFirstIn(className).getOrElse("-1")
+          s"SolutionInfo($dayNumber, () => new $className())"
+        },
+        ",\n"
+      )
       .toString
     val resultPath = Root.resolve(
       Paths.get(SourcePart.toString(), NamespacePart.toString, "solution", "Index.scala")
