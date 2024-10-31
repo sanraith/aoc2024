@@ -1,4 +1,5 @@
 import org.scalajs.linker.interface.ModuleSplitStyle
+import org.scalajs.linker.interface.ESVersion
 
 Global / lintUnusedKeysOnLoad := false
 run / javaOptions += "-Dfile.encoding=UTF-8"
@@ -57,8 +58,9 @@ lazy val aoc2024 = crossProject(JSPlatform, JVMPlatform)
     scalaJSLinkerConfig ~= {
       _.withModuleKind(ModuleKind.ESModule)
         .withModuleSplitStyle(
-          ModuleSplitStyle.SmallModulesFor(List("hu.sanraith.aoc2024.web"))
+          ModuleSplitStyle.SmallModulesFor(List("hu.sanraith.aoc2024"))
         )
+        .withESFeatures(_.withESVersion(ESVersion.ES2020))
     },
 
     /* Depend on the scalajs-dom library.
