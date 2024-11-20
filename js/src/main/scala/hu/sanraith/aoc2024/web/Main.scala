@@ -8,9 +8,11 @@ import hu.sanraith.aoc2024.solution.Day01
 import hu.sanraith.aoc2024.solution.Context
 import com.raquo.laminar.api.L.{*, given}
 import scala.util.Random
+import hu.sanraith.aoc2024.solution.SolutionDefinitions
 import hu.sanraith.aoc2024.solution.SolutionMap
 import hu.sanraith.aoc2024.solution.Solution
 import scala.util.Try
+import hu.sanraith.aoc2024.solution.SolutionInfo
 
 class SimpleContext(override val input: String) extends Context
 
@@ -20,21 +22,46 @@ def Main(): Unit =
 
 object WebMain {
   def mainPage() = { //
+    val days = SolutionMap.toList.sortBy { case (key, _) => key }.map { case (_, value) => value }
+    val cardAsd = days.map(x => card1(x))
+
+    // val day = SolutionMap.get(1).headOption.map(_.createInstance())
+
     div(
-      a(
-        href := "https://vitejs.dev",
-        target := "_blank",
-        img(src := "/vite.svg", className := "logo", alt := "Vite logo")
-      ),
-      a(
-        href := "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
-        target := "_blank",
-        img(src := typescriptLogo, className := "logo vanilla", alt := "JavaScript logo")
-      ),
-      h1("Hello Laminar!"),
-      dayElement(),
-      p(className := "read-the-docs", "Click on the Vite logo to learn more")
+      className := "container",
+      p("hello"),
+      cardAsd
     )
+    // div(
+    //   a(
+    //     href := "https://vitejs.dev",
+    //     target := "_blank",
+    //     img(src := "/vite.svg", className := "logo", alt := "Vite logo")
+    //   ),
+    //   a(
+    //     href := "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+    //     target := "_blank",
+    //     img(src := typescriptLogo, className := "logo vanilla", alt := "JavaScript logo")
+    //   ),
+    //   h1("Hello Laminar!"),
+    //   dayElement(),
+    //   p(className := "read-the-docs", "Click on the Vite logo to learn more")
+    // )
+  }
+
+  def card1(solutionInfo: SolutionInfo) = {
+    val dayModel = DayModel(solutionInfo.day, "")
+    div(
+      className := "card", //
+      div(
+        className := "card-icons", //
+        span(title := "Edit input", "✏️"),
+        span(title := "Go to source", "🔗"),
+        span(title := "Go to puzzle", "🧩")
+      ),
+      h2(s"Day ${solutionInfo.day}: ${dayModel.solution.map(_.title).getOrElse("xxx")}")
+    )
+
   }
 
   def dayElement() = {

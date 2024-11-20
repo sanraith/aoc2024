@@ -69,8 +69,7 @@
         .results-container {
             display: flex;
             justify-content: space-between;
-            align-items: flex-end;
-            /* Align items to the top */
+            align-items: center;
         }
 
         .result-text {
@@ -134,6 +133,24 @@
             cursor: default;
             background-color: #555555;
         }
+
+        .results-table {
+            width: 100%;
+            margin: 10px 50px 10px 0;
+        }
+
+        .results-table td {
+            padding: 10px 0;
+        }
+
+        .results-table .part,
+        .results-table .runtime {
+            width: 10%;
+        }
+
+        .results-table .runtime {
+            text-align: right;
+        }
     </style>
 </head>
 
@@ -149,10 +166,18 @@
             <h2>Day 1: Example title</h2>
             <h3>Results</h3>
             <div class="results-container">
-                <div>
-                    <p>Part 1: <span class="result-text" id="day1-part1-result">example result 1</span></p>
-                    <p>Part 2: <span class="result-text" id="day1-part2-result">example result 2</span></p>
-                </div>
+                <table class="results-table">
+                    <tr>
+                        <td class="part">Part 1</td>
+                        <td class="result-text" id="day1-part1-result">example result 1</td>
+                        <td class="runtime" id="day1-part1-runtime">---</td>
+                    </tr>
+                    <tr>
+                        <td class="part">Part 2</td>
+                        <td class="result-text" id="day1-part2-result">example result 2</td>
+                        <td class="runtime" id="day1-part2-runtime">---</td>
+                    </tr>
+                </table>
                 <button class="run-solution-button" id="run-day1-solution">Run Solution</button>
             </div>
         </div>
@@ -165,11 +190,20 @@
             <h2>Day 2: Example title</h2>
             <h3>Results</h3>
             <div class="results-container">
-                <div>
-                    <p>Part 1: <span class="result-text" id="day2-part1-result">example result 1</span></p>
-                    <p>Part 2: <span class="result-text" id="day2-part2-result">example result 2 line 1<br>example
-                            result 2 line 2</span></p>
-                </div>
+                <table class="results-table">
+                    <tr>
+                        <td class="part">Part 1</td>
+                        <td class="result-text" id="day2-part1-result">example result 1</td>
+                        <td class="runtime" id="day2-part1-runtime">---</td>
+                    </tr>
+                    <tr>
+                        <td class="part">Part 2</td>
+                        <td class="result-text" id="day2-part2-result">
+                            <br>example result 2 line 1<br>example result 2 line 2
+                        </td>
+                        <td class="runtime" id="day2-part2-runtime">---</td>
+                    </tr>
+                </table>
                 <button class="run-solution-button" id="run-day2-solution">Run Solution</button>
             </div>
         </div>
