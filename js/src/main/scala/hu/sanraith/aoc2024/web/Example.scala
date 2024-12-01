@@ -4,7 +4,7 @@ import org.scalajs.dom
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.*
-import hu.sanraith.aoc2024.solution.Day01
+// import hu.sanraith.aoc2024.solution.Day01
 import hu.sanraith.aoc2024.solution.Context
 import com.raquo.laminar.api.L.{*, given}
 import scala.util.Random
@@ -19,8 +19,8 @@ object Example {
   import model.*
 
   def appElement(): Element =
-    val day01 = Day01()
-    val result = day01.part2(SimpleContext("4nineeightseven2")).toString()
+    // val day01 = Day01()
+    val result = "" // day01.part2(SimpleContext("4nineeightseven2")).toString()
     div(h1("Live Chart"), h2("Result: ", result), renderDataTable(), renderDataList())
 
   def renderDataList(): Element = ul(

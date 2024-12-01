@@ -4,7 +4,7 @@ import org.scalajs.dom
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.*
-import hu.sanraith.aoc2024.solution.Day01
+// import hu.sanraith.aoc2024.solution.Day01
 import hu.sanraith.aoc2024.solution.Context
 import com.raquo.laminar.api.L.{*, given}
 import scala.util.Random
