@@ -8,16 +8,9 @@ Solutions for Advent of Code 2024.
 - Install Node.js: <https://nodejs.org/en/download/prebuilt-installer>
 - `npm install`
 
-## Run WEB project with live refresh
-
-Run these commands in parallel:
-
-- `sbt web` or `sbt ~fastLinkJS` - Rebuilds scala sources on changes
-- `npm run dev` - Runs webserver and rebuilds web sources on changes
-
 ## Console commands
 
-Use `sbt "<command>"`, or start `sbt` and enter one of the commands:
+Start `sbt` and enter one of the commands:
 
 - Run solutions:  
 `solve [ all | last | <days...> ]`
@@ -39,6 +32,13 @@ Use `sbt "<command>"`, or start `sbt` and enter one of the commands:
 - `scaffold reload input 1 2` - Re-download the input for the given days, invalidating the cache.
 - `test` - Run all tests.
 - `test-12` - Run tests for day 12.
+
+## Run WEB project with live refresh
+
+Run these commands in parallel:
+
+- `sbt web` or `sbt ~fastLinkJS` - Rebuilds scala sources on changes
+- `npm run dev` - Runs webserver and rebuilds web sources on changes
 
 ## Project structure
 
@@ -68,7 +68,7 @@ The app generates `aoc2024.config.json` on first run:
     // Copy the last successful result to the clipboard
     "copyResultToClipboard": false,
     // The event year to use for puzzle info from adventofcode.com
-    "eventYear" : 2023,
+    "eventYear" : 2024,
     // Open the scaffolded files using the editor defined in "pathToEditor"
     "openScaffoldedFiles": false,
     // The editor "openScaffoldedFiles" uses
