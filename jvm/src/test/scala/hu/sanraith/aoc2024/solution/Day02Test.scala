@@ -7,25 +7,13 @@ class Day02Test extends SolutionTestSpec:
     given day: Solution = Day02()
 
     it("solves part 1"):
-      assertPart(
-        day.part1,
-        expected = 2,
-        input = exampleInput
-      )
+      assertPart(day.part1, expected = 2, input = exampleInput)
 
     it("solves part 2"):
-      assertPart(
-        day.part2,
-        expected = 4,
-        input = exampleInput
-      )
+      assertPart(day.part2, expected = 4, input = exampleInput)
 
     it("solves part 2 when first number is wrong"):
-      assertPart(
-        day.part2,
-        expected = 1,
-        input = "999 8 7 6 5 4"
-      )
+      assertPart(day.part2, expected = 1, input = "999 8 7 6 5 4")
   }
 
   describe("Day02 for puzzle input") {

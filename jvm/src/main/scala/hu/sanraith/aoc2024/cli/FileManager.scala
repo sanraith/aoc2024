@@ -72,11 +72,11 @@ object FileManager:
       .fill("__DAY_STR__", dayStr)
       .fill("__YEAR__", Util.CurrentYear.toString)
       .fill("__PART_1_TEST_INPUT__", part1TestInput)
-      .fill("__PART_1_TEST_EXPECTED__", part1TestExpected)
+      .fill("__PART_1_TEST_EXPECTED__", intOrStringLiteral(part1TestExpected))
       .fill("__PART_2_TEST_INPUT__", part2TestInput)
-      .fill("__PART_2_TEST_EXPECTED__", part2TestExpected)
-      .fill("__PART_1_EXPECTED__", part1Expected)
-      .fill("__PART_2_EXPECTED__", part2Expected)
+      .fill("__PART_2_TEST_EXPECTED__", intOrStringLiteral(part2TestExpected))
+      .fill("__PART_1_EXPECTED__", intOrStringLiteral(part1Expected))
+      .fill("__PART_2_EXPECTED__", intOrStringLiteral(part2Expected))
       .toString
     val solutionPath =
       Root.resolve(Paths.get(TestRoot.toString, s"Day${dayStr}Test.scala"))
@@ -127,3 +127,5 @@ object FileManager:
   def readUtf8File(fileName: Path): String = Files.readString(fileName, UTF_8)
 
   def getDayStr(day: Int) = if (day < 10) s"0$day" else day.toString
+
+  def intOrStringLiteral(text: String): String = text.toIntOption.getOrElse(s"\"$text\"").toString

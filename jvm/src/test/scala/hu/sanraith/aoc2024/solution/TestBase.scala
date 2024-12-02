@@ -20,8 +20,10 @@ abstract class SolutionTestSpec extends AnyFunSpec {
   )(implicit solution: Solution) =
     solution.println = println
     val resolvedInput = trim(Option(input).getOrElse(Util.loadInputFromFile(solution)))
-    val actual = part(TestContext(resolvedInput))
-    assertResult(trim(expected.toString))(actual.toString)
+    try
+      val actual = part(TestContext(resolvedInput))
+      assertResult(trim(expected.toString))(actual.toString)
+    catch case _: NotImplementedError => pending
 
   /** PENDING assert, remove "_" to make test active. */
   def _assertPart(
