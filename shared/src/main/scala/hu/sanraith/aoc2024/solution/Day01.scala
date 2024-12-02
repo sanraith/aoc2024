@@ -8,7 +8,7 @@ class Day01 extends Solution:
 
   override def part1(ctx: Context): Int =
     val (seq1, seq2) = parseInput(ctx)
-    seq1.sorted().zip(seq2.sorted()).map { case (a, b) => Math.abs(a - b) }.sum
+    seq1.sorted.zip(seq2.sorted).map { case (a, b) => Math.abs(a - b) }.sum
 
   override def part2(ctx: Context): Int =
     val (seq1, seq2) = parseInput(ctx)
