@@ -19,6 +19,7 @@
         "**/target": true
     },
     "cSpell.words": [
+        "dont",
         "scalajs",
         "vite"
     ],
