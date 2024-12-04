@@ -4,20 +4,17 @@ package hu.sanraith.aoc2024.solution
 class Day04 extends Solution:
   override val title: String = "Ceres Search"
 
+  val allDirections = for
+    x <- -1 to 1
+    y <- -1 to 1
+    if !(x == 0 && y == 0)
+  yield Point(x, y)
+
   override def part1(ctx: Context): Int =
-    val directions = for
-      x <- -1 to 1
-      y <- -1 to 1
-      if !(x == 0 && y == 0)
-    yield Point(x, y)
-    hitsAtCells("XMAS", directions, ctx).sum
+    hitsAtCells("XMAS", allDirections, ctx).sum
 
   override def part2(ctx: Context): Int =
-    val directions = for
-      x <- -1 to 1
-      y <- -1 to 1
-      if x != 0 && y != 0
-    yield Point(x, y)
+    val directions = allDirections.filter(p => p.x != 0 && p.y != 0)
     hitsAtCells("MAS", directions, ctx).count(_ >= 2)
 
   def hitsAtCells(word: String, directions: Seq[Point], ctx: Context): Seq[Int] =
@@ -32,7 +29,7 @@ class Day04 extends Solution:
     yield directions.count: direction =>
       (0 until word.length).forall: index =>
         val Point(x, y) = start + direction * (index - delta)
-        lines.lift(y).flatMap(_.lift(x)).exists(_ == word(index))
+        lines.lift(y).flatMap(_.lift(x)).contains(word(index))
 
   case class Point(x: Int, y: Int):
     def +(other: Point): Point = Point(this.x + other.x, this.y + other.y)
