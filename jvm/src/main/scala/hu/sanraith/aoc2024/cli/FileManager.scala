@@ -72,11 +72,11 @@ object FileManager:
       .fill("__DAY_STR__", dayStr)
       .fill("__YEAR__", Util.CurrentYear.toString)
       .fill("__PART_1_TEST_INPUT__", part1TestInput)
-      .fill("__PART_1_TEST_EXPECTED__", intOrStringLiteral(part1TestExpected))
+      .fill("__PART_1_TEST_EXPECTED__", wholeNumberOrStringLiteral(part1TestExpected))
       .fill("__PART_2_TEST_INPUT__", part2TestInput)
-      .fill("__PART_2_TEST_EXPECTED__", intOrStringLiteral(part2TestExpected))
-      .fill("__PART_1_EXPECTED__", intOrStringLiteral(part1Expected))
-      .fill("__PART_2_EXPECTED__", intOrStringLiteral(part2Expected))
+      .fill("__PART_2_TEST_EXPECTED__", wholeNumberOrStringLiteral(part2TestExpected))
+      .fill("__PART_1_EXPECTED__", wholeNumberOrStringLiteral(part1Expected))
+      .fill("__PART_2_EXPECTED__", wholeNumberOrStringLiteral(part2Expected))
       .toString
     val solutionPath =
       Root.resolve(Paths.get(TestRoot.toString, s"Day${dayStr}Test.scala"))
@@ -128,4 +128,8 @@ object FileManager:
 
   def getDayStr(day: Int) = if (day < 10) s"0$day" else day.toString
 
-  def intOrStringLiteral(text: String): String = text.toIntOption.getOrElse(s"\"$text\"").toString
+  def wholeNumberOrStringLiteral(text: String): String =
+    text.toIntOption
+      .map(_.toString)
+      .orElse(text.toLongOption.map(x => s"${x}L"))
+      .getOrElse(s"\"$text\"")
