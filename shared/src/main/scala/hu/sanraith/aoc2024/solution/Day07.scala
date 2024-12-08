@@ -26,7 +26,7 @@ class Day07 extends Solution:
       partialResult: Option[Long] = None
   ): Boolean = partialResult match
     case None => isEquationValid(expected, parts.tail, ops, Some(parts.head))
-    case Some(result) if parts.length == 0 => expected == result
+    case Some(result) if parts.length == 0 => result == expected
     case Some(partialResult) =>
       ops
         .map:

@@ -1,6 +1,7 @@
 package hu.sanraith.aoc2024.solution
 
 import scala.collection.mutable
+import hu.sanraith.aoc2024.util._
 
 /** Solution for https://adventofcode.com/2024/day/6 */
 class Day06 extends Solution:
@@ -20,9 +21,9 @@ class Day06 extends Solution:
     val grid = parseInput(ctx)
     val (route, _) = findRoute(grid)
     val routeSteps = route.map { case (pos, dir) => pos } - grid.start
-    routeSteps.toSeq.zipWithIndex.count:
-      case (step, idx) =>
-        ctx.progress(idx.toDouble / routeSteps.size)
+    routeSteps.iterator
+      .tapEachWithIndex { case (_, idx) => ctx.progress(idx.toDouble / routeSteps.size) }
+      .count: step =>
         val (_, isLoop) = findRoute(grid, Some(grid.tiles + (step -> OBSTACLE_TILE)))
         isLoop
 
