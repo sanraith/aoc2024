@@ -30,7 +30,9 @@
         ".vscode-insiders"
     ],
     "cSpell.words": [
+        "Collinearity",
         "dont",
+        "Fragmenter",
         "scalajs",
         "vite"
     ],

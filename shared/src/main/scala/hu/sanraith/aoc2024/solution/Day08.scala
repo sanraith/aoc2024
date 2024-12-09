@@ -1,7 +1,5 @@
 package hu.sanraith.aoc2024.solution
 
-import scala.collection.mutable
-
 /** Solution for https://adventofcode.com/2024/day/8 */
 class Day08 extends Solution:
   override val title: String = "Resonant Collinearity"
