@@ -36,20 +36,18 @@ class Day10 extends Solution:
     val trailHeads = grid.tiles.collect { case (p, h) if h == START_HEIGHT => p }
 
     trailHeads.map { trailHead =>
-      val visited = mutable.Set.empty[Seq[Point]]
       val queue = mutable.Queue(Seq(trailHead))
       var pathCount = 0
       while (queue.nonEmpty)
         val trail = queue.dequeue()
         val pos = trail.last
         val height = grid.tiles(pos)
-        if (visited.add(trail))
-          if (height == TARGET_HEIGHT) pathCount += 1
-          else
-            DIRECTIONS
-              .map(pos + _)
-              .filter(p => grid.isInBounds(p) && grid.tiles(p) == height + 1)
-              .foreach(p => queue.enqueue(trail :+ p))
+        if (height == TARGET_HEIGHT) pathCount += 1
+        else
+          DIRECTIONS
+            .map(pos + _)
+            .filter(p => grid.isInBounds(p) && grid.tiles(p) == height + 1)
+            .foreach(p => queue.enqueue(trail :+ p))
       pathCount
     }.sum
 
