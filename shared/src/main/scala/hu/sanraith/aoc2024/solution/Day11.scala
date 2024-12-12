@@ -16,11 +16,11 @@ class Day11 extends Solution:
     blink(75, numbers, ctx)
 
   def blink(blinkCount: Int, numbers: Seq[Long], ctx: Context) =
-    var numberCounts = numbers.groupBy(identity).mapValues(_.length.toLong).toMap
+    val numberCounts = numbers.groupBy(identity).mapValues(_.length.toLong).toMap
     (1 to blinkCount)
-      .tapEachWithIndex { case (_, idx) => ctx.progress(idx.toDouble / blinkCount) }
-      .foreach: _ =>
-        numberCounts = numberCounts.toSeq
+      .foldLeft(numberCounts) { case (numberCounts, blinkIdx) =>
+        ctx.progress(blinkIdx.toDouble / blinkCount)
+        numberCounts.toSeq
           .flatMap { case (num, count) =>
             val newNumbers = num match
               case 0 => Seq(1L)
@@ -33,6 +33,8 @@ class Day11 extends Solution:
           .groupBy { case (num, _) => num }
           .mapValues(_.map { case (_, count) => count }.sum)
           .toMap
-    numberCounts.map { case (_, count) => count }.sum
+      }
+      .map { case (_, count) => count }
+      .sum
 
   def parseInput(ctx: Context) = ctx.input.trim.split(' ').map(_.toLong).toSeq
