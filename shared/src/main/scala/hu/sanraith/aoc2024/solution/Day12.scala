@@ -38,20 +38,20 @@ class Day12 extends Solution:
             }
         Region(tile, area, getSides(perimeter.toSeq))
 
-  def getSides(perimeter: Seq[(Point, Direction)]) =
+  def getSides(perimeter: Seq[(Point, Direction)]): Seq[Seq[Point]] =
     // Point groups where each group corresponds to 1 or more sides
     val sidePointGroups: Iterable[Seq[Point]] = perimeter
       .groupMap { case (_, dir) => dir } { case (pos, _) => pos }
       .flatMap { case (dir, points) =>
         points.toSeq
           .groupBy(p => if (dir.x == 0) p.y else p.x)
-          .map { case (_, seq) => seq.sortBy(p => if (dir.x == 0) p.x else p.y) }
+          .map { case (_, seq) => seq.sortBy(p => (p.x, p.y)) }
       }
 
     // Collect continuous segments in groups to be the sides
     sidePointGroups.toSeq.flatMap: group =>
       val (sides, lastSide) = group.tail.foldLeft(Seq.empty[Seq[Point]], Seq(group.head)):
-        case ((sides, side), p) if (p.isNeighbor(side.last)) => (sides, (side :+ p))
+        case ((sides, side), p) if (p.isNeighbor(side.last)) => (sides, side :+ p)
         case ((sides, side), p)                              => (sides :+ side, Seq(p))
       sides :+ lastSide
 
