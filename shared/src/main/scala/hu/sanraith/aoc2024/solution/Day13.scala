@@ -1,7 +1,7 @@
 package hu.sanraith.aoc2024.solution
 
 import scala.collection.mutable
-import scala.math.Integral.Implicits.*
+import scala.math.Integral.Implicits._
 
 /** Solution for https://adventofcode.com/2024/day/13 */
 class Day13 extends Solution:
