@@ -19,7 +19,11 @@ abstract class SolutionTestSpec extends AnyFunSpec {
       input: String = null
   )(implicit solution: Solution) =
     solution.println = println
-    val resolvedInput = trim(Option(input).getOrElse(Util.loadInputFromFile(solution)))
+    val resolvedInput = trim(
+      Option(input)
+        .map(_.replace("\r\n", "\n"))
+        .getOrElse(Util.loadInputFromFile(solution))
+    )
     try
       val actual = part(TestContext(resolvedInput))
       assertResult(trim(expected.toString))(actual.toString)
