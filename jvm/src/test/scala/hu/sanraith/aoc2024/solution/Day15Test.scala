@@ -26,14 +26,14 @@ class Day15Test extends SolutionTestSpec:
       assertPart(day.part1, expected = 10092, input = testInput)
 
     it("solves part 2"):
-      assertPart(day.part2, expected = "__PART_2_TEST_EXPECTED__", input = testInput)
+      assertPart(day.part2, expected = 9021, input = testInput)
   }
 
   describe("Day15 for puzzle input") {
     given day: Solution = Day15()
 
     it("solves part 1")(assertPart(day.part1, 1497888))
-    it("solves part 2")(_assertPart(day.part2, "__PART_2_EXPECTED__"))
+    it("solves part 2")(assertPart(day.part2, 1522420))
   }
 
   val testInput = """
