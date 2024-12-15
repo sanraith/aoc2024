@@ -16,26 +16,22 @@ class Day14 extends Solution:
     val gridMiddle = gridSize / 2
     val gridHalf = gridMiddle + Point(1, 1)
     guards
-      .map { case Guard(p, v) => Guard((p + v * steps) % gridSize, v) }
+      .map(g => Guard((g.p + g.v * steps) % gridSize, g.v))
       .filterNot(g => g.p.x == gridMiddle.x || g.p.y == gridMiddle.y)
       .groupBy(_.p / gridHalf)
-      .mapValues(_.length)
-      .values
+      .map { case (_, guardsInQuad) => guardsInQuad.length }
       .product
 
   override def part2(ctx: Context): Long =
     // The heuristic is looking for a long vertical line that represents the trunk of the tree
     val minTrunkSize = 20
     val guards = parseInput(ctx)
-
     Iterator
       .from(1)
-      .map: step =>
-        val guardsAtStep = guards.map { case Guard(p, v) => Guard((p + v * step) % gridSize, v) }
-        val hasTrunk = guardsAtStep
-          .sortBy(_.p.y)
-          .groupMap(_.p.x)(_.p)
-          .values
+      .flatMap: step =>
+        val guardsAtStep = guards.map(g => Guard((g.p + g.v * step) % gridSize, g.v))
+        val columns = guardsAtStep.map(_.p).distinct.sortBy(_.y).groupBy(_.x).values
+        val hasTrunk = columns
           .filter(_.length >= minTrunkSize)
           .exists: points =>
             val (trunks, trunk) = points.tail.foldLeft(Seq.empty[Int], Seq(points.head)):
@@ -43,9 +39,8 @@ class Day14 extends Solution:
               case ((trunks, trunk), p) => (trunks :+ trunk.length, Seq(p))
             (trunks :+ trunk.length).exists(_ >= minTrunkSize)
         // if (hasTrunk) render(guardsAtStep)
-        (step, hasTrunk)
-      .collectFirst { case (step, hasTrunk) if hasTrunk => step }
-      .get
+        if (hasTrunk) Some(step) else None
+      .next
 
   def render(guards: Seq[Guard]) =
     val map = guards.groupBy(g => g.p).toMap
