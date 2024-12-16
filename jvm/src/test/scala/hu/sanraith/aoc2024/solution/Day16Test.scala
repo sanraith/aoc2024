@@ -7,10 +7,26 @@ class Day16Test extends SolutionTestSpec:
     given day: Solution = Day16()
 
     it("solves part 1 first"):
-      assertPart(
-        day.part1,
-        expected = 7036,
-        input = """
+      assertPart(day.part1, expected = 7036, input = firstExample)
+
+    it("solves part 1 second"):
+      assertPart(day.part1, expected = 11048, input = secondExample)
+
+    it("solves part 2 first"):
+      assertPart(day.part2, expected = 45, input = firstExample)
+
+    it("solves part 2 second "):
+      assertPart(day.part2, expected = 64, input = secondExample)
+  }
+
+  describe("Day16 for puzzle input") {
+    given day: Solution = Day16()
+
+    it("solves part 1")(assertPart(day.part1, 95476))
+    it("solves part 2")(assertPart(day.part2, 511))
+  }
+
+  val firstExample = """
 ###############
 #.......#....E#
 #.#.###.#.###.#
@@ -26,13 +42,8 @@ class Day16Test extends SolutionTestSpec:
 #.###.#.#.#.#.#
 #S..#.....#...#
 ###############"""
-      )
 
-    it("solves part 1 second"):
-      assertPart(
-        day.part1,
-        expected = 11048,
-        input = """
+  val secondExample = """
 #################
 #...#...#...#..E#
 #.#.#.#.#.#.#.#.#
@@ -50,19 +61,3 @@ class Day16Test extends SolutionTestSpec:
 #.#.#.#########.#
 #S#.............#
 #################"""
-      )
-
-    it("solves part 2"):
-      assertPart(
-        day.part2,
-        expected = "__PART_2_TEST_EXPECTED__",
-        input = """__PART_2_TEST_INPUT__"""
-      )
-  }
-
-  describe("Day16 for puzzle input") {
-    given day: Solution = Day16()
-
-    it("solves part 1")(assertPart(day.part1, 95476))
-    it("solves part 2")(_assertPart(day.part2, "__PART_2_EXPECTED__"))
-  }
