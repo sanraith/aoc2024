@@ -21,8 +21,13 @@ Program: 0,1,5,4,3,0"""
     it("solves part 2"):
       assertPart(
         day.part2,
-        expected = "__PART_2_TEST_EXPECTED__",
-        input = """__PART_2_TEST_INPUT__"""
+        expected = 117440,
+        input = """
+Register A: 2024
+Register B: 0
+Register C: 0
+
+Program: 0,3,5,4,3,0"""
       )
   }
 
