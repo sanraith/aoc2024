@@ -35,5 +35,5 @@ Program: 0,3,5,4,3,0"""
     given day: Solution = Day17()
 
     it("solves part 1")(assertPart(day.part1, "3,5,0,1,5,1,5,1,0"))
-    it("solves part 2")(_assertPart(day.part2, "__PART_2_EXPECTED__"))
+    it("solves part 2")(assertPart(day.part2, 107413700225434L))
   }
