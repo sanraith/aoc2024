@@ -6,7 +6,7 @@ import scala.collection.{mutable => mut}
 class Day17 extends Solution:
   override val title: String = "Chronospatial Computer"
 
-  val OPERATORS: Map[Int, Instruction] =
+  val INSTRUCTIONS: Map[Int, Instruction] =
     Seq(Adv, Bxl, Bst, Jnz, Bxc, Out, Bdv, Cdv).map(x => x.opCode -> x).toMap
 
   override def part1(ctx: Context): String =
@@ -39,7 +39,7 @@ class Day17 extends Solution:
     registerA
 
   def executeNext(program: Seq[Int], registers: Registers): Instruction =
-    val instruction = OPERATORS(program(registers.ip))
+    val instruction = INSTRUCTIONS(program(registers.ip))
     val param = program(registers.ip + 1)
     instruction.exec(param, registers)
     registers.ip += 2
@@ -56,7 +56,7 @@ class Day17 extends Solution:
     var ip: Int = 0
     val output: mut.Queue[Int] = mut.Queue.empty[Int]
 
-  trait Instruction(val opCode: Int):
+  sealed trait Instruction(val opCode: Int):
     def exec(p: Int, r: Registers): Unit
     def combo(p: Int, r: Registers): Long = p match
       case p if p >= 0 && p <= 3 => p
