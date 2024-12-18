@@ -14,35 +14,36 @@ class Day18 extends Solution:
 
   override def part1(ctx: Context): Long =
     val bytes = parseInput(ctx).take(part1ByteCount).toSet
-    findDistance(bytes, ctx).get
+    findPath(bytes).size
 
   override def part2(ctx: Context): String =
     val bytes = parseInput(ctx)
-    var byteIdx = part1ByteCount
-    var distance: Option[Int] = Some(-1)
-    while distance.isDefined && byteIdx < bytes.length do
-      byteIdx += 1
-      ctx.progress(byteIdx.toDouble / bytes.length)
-      distance = findDistance(bytes.take(byteIdx).toSet, ctx)
+    var byteCount = part1ByteCount
+    var path = bytes.toSet
+    while path.nonEmpty && byteCount < bytes.length do
+      ctx.progress(byteCount.toDouble / bytes.length)
+      byteCount += 1
+      if path.contains(bytes(byteCount - 1)) then //
+        path = findPath(bytes.take(byteCount).toSet)
 
-    val Point(x, y) = bytes(byteIdx - 1)
-    s"$x,$y"
+    val cutoffByte = bytes(byteCount - 1)
+    s"${cutoffByte.x},${cutoffByte.y}"
 
-  def findDistance(bytes: Set[Point], ctx: Context) =
+  def findPath(bytes: Set[Point]) =
     val start = Point(0, 0)
     val target = Point(grid.width - 1, grid.height - 1)
     val visited = mut.Set.empty[Point]
-    val queue = mut.Queue((start, 0))
-    var distance: Option[Int] = None
-    while distance.isEmpty && queue.nonEmpty do
-      val (pos, dist) = queue.dequeue()
-      if (pos == target) distance = Some(dist)
+    val queue = mut.Queue((start, 0, Set.empty[Point]))
+    var finalPath = Set.empty[Point]
+    while finalPath.isEmpty && queue.nonEmpty do
+      val (pos, dist, path) = queue.dequeue()
+      if (pos == target) finalPath = path
       else if visited.add(pos) then
         DIRECTIONS
           .map(pos + _)
           .filter(p => grid.isInBounds(p) && !bytes.contains(p))
-          .foreach(p => queue.enqueue((p, dist + 1)))
-    distance
+          .foreach(p => queue.enqueue((p, dist + 1, path + p)))
+    finalPath
 
   def parseInput(ctx: Context) = ctx.input.linesIterator
     .map(_.split(',').map(_.toLong).toSeq)
