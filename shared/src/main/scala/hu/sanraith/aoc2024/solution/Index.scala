@@ -21,5 +21,6 @@ val SolutionDefinitions: List[SolutionInfo] = List(
   SolutionInfo(15, () => new Day15()),
   SolutionInfo(16, () => new Day16()),
   SolutionInfo(17, () => new Day17()),
-  SolutionInfo(18, () => new Day18())
+  SolutionInfo(18, () => new Day18()),
+  SolutionInfo(19, () => new Day19())
 )
