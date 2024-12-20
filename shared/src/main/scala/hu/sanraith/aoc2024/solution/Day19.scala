@@ -22,22 +22,20 @@ class Day19 extends Solution:
   def countArrangements(
       design: WrappedString,
       towelsByInitial: Map[Char, Seq[String]],
-      cache: mut.Map[WrappedString, Long] = mut.Map.empty[WrappedString, Long]
-  ): Long =
-    if design.length == 0 then 1
-    else if cache.contains(design) then cache(design)
-    else
+      cache: mut.Map[WrappedString, Long] = mut.Map("".toSeq -> 1)
+  ): Long = cache.get(design) match
+    case Some(count) => count
+    case None =>
       val towelsToCheck = towelsByInitial.getOrElse(design.head, Seq.empty)
-      val arrangements = towelsToCheck.collect {
+      cache(design) = towelsToCheck.collect {
         case towel if design.startsWith(towel) =>
           countArrangements(design.slice(towel.length, design.length), towelsByInitial, cache)
       }.sum
-      cache(design) = arrangements
-      arrangements
+      cache(design)
 
   def parseInput(ctx: Context) =
-    val wordRegex = """\w+""".r
-    val Seq(towelsStr, designsStr) = ctx.input.split("""\R\R""").toSeq
+    val wordRegex = raw"\w+".r
+    val Seq(towelsStr, designsStr) = ctx.input.split(raw"\R\R").toSeq
     val towels = wordRegex.findAllIn(towelsStr).toSeq
     val designs = wordRegex.findAllIn(designsStr).toSeq
     (towels, designs)
