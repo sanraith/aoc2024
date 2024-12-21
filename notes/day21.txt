@@ -1,0 +1,35 @@
+278748
+
+671A
+
+  6   7  1   A
+^^A^<<AvvA>>vA
+
+^ ^ A   <<  ^ A  vv  A >> v  A
+<AA>Av<<AA>^A>A<vAA>^AvAA<A>^A
+
+   <   AA > A  v <<   AA >  ^ A > A   < v  AA >  ^ A  v  AA   <   A >  ^ A
+v<<A>>^AAvA^A<vA<AA>>^AAvA<^A>AvA^Av<<A>A>^AAvA<^A>A<vA>^AAv<<A>>^AvA<^A>A
+
+6 -> 
+^^A -> 
+<AA>A -> 
+v<<A>>^AAvA^A
+
+6 A A
+    >
+  ^ A
+  ^ A
+  A <
+
+
+(A)             6 // 1
+(A)        ^^   A // 3
+(A)    <   AA > A // 5
+(A) v<<A>>^AAvA^A // 13
+
+
+6.
+6.3^^A                           // 6     -> ^^A           / ^A / 3
+A^2<A ^^1A ^A2>A                 // ^^A   -> <AA>A         / <A / 5
+A<4v<<A <A4>>^A AA1A A>2vA >A2^A // <AA>A -> v<<A>>^AAvA^A / <A / 13

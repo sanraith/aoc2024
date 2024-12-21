@@ -1,7 +1,7 @@
 package hu.sanraith.aoc2024.solution
 
-import scala.collection.{mutable => mut}
 import hu.sanraith.aoc2024.util._
+import scala.collection.{mutable => mut}
 
 /** Solution for https://adventofcode.com/2024/day/20 */
 class Day20 extends Solution:
@@ -45,7 +45,7 @@ class Day20 extends Solution:
       }
       .sum
 
-  def findPath(grid: Grid) =
+  def findPath(grid: Grid): Seq[Point] =
     val start = grid.start
     val target = grid.end
     val visited = mut.Set.empty[Point]

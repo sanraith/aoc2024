@@ -30,7 +30,10 @@ lazy val aoc2024 = crossProject(JSPlatform, JVMPlatform)
   .in(file("."))
   .settings(
     name := "aoc2024",
-    version := "0.1-SNAPSHOT"
+    version := "0.1-SNAPSHOT",
+    libraryDependencies ++= Seq(
+      "org.scala-lang.modules" %% "scala-parallel-collections" % "1.1.0"
+    )
   )
   .jvmSettings(
     libraryDependencies ++= Seq(
