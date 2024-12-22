@@ -28,18 +28,20 @@ class Day09 extends Solution:
   override def part2(ctx: Context): Long =
     var segments = parseInput(ctx)
     val files = segments.collect { case f: File => f }.toSeq.reverse
-    files.iterator.zipWithIndex.foreach { case (file, idx) =>
-      ctx.progress(idx.toDouble / files.size)
-      segments.collectFirst { case s: Space if s.size >= file.size && s.pos < file.pos => s } match
-        case Some(space) =>
-          segments -= space
-          segments -= file
-          segments += File(file.id, space.pos, file.size)
-          segments += Space(file.pos, file.size)
-          val updatedSpace = Space(space.pos + file.size, space.size - file.size)
-          if updatedSpace.size > 0 then segments += updatedSpace
-        case None => ()
-    }
+    files.iterator
+      .reportProgress(files.size, ctx)
+      .foreach: file =>
+        segments.collectFirst {
+          case s: Space if s.size >= file.size && s.pos < file.pos => s
+        } match
+          case Some(space) =>
+            segments -= space
+            segments -= file
+            segments += File(file.id, space.pos, file.size)
+            segments += Space(file.pos, file.size)
+            val updatedSpace = Space(space.pos + file.size, space.size - file.size)
+            if updatedSpace.size > 0 then segments += updatedSpace
+          case None => ()
     checkSum(segments)
 
   def checkSum(segments: SortedSet[Segment]): Long = segments.toSeq

@@ -15,7 +15,7 @@ class Day07 extends Solution:
     val ops = Seq('+', '*', '|')
     val equations = parseInput(ctx)
     equations.iterator
-      .tapEachWithIndex { case (_, idx) => ctx.progress(idx.toDouble / equations.length) }
+      .reportProgress(equations.length, ctx)
       .collect { case (res, parts) if isEquationValid(res, parts, ops) => res }
       .sum
 

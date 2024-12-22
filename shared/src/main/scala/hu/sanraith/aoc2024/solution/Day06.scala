@@ -22,7 +22,7 @@ class Day06 extends Solution:
     val (route, _) = findRoute(grid)
     val routeSteps = route.map { case (pos, dir) => pos } - grid.start
     routeSteps.iterator
-      .tapEachWithIndex { case (_, idx) => ctx.progress(idx.toDouble / routeSteps.size) }
+      .reportProgress(routeSteps.size, ctx)
       .count: step =>
         val (_, isLoop) = findRoute(grid, Some(grid.tiles + (step -> OBSTACLE_TILE)))
         isLoop

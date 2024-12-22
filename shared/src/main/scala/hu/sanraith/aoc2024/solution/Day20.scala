@@ -36,7 +36,7 @@ class Day20 extends Solution:
     val path = findPath(grid)
     val pathMap = path.zipWithIndex.toMap
     path.zipWithIndex.iterator
-      .tapEach { case (_, i) => ctx.progress(i.toDouble / path.length) }
+      .reportProgress(path.length, ctx)
       .map { case (a, aIdx) =>
         pathMap.count { case (b, bIdx) =>
           val dist = a.manhattan(b)

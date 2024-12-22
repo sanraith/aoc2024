@@ -12,9 +12,7 @@ class Day22 extends Solution:
 
   override def part1(ctx: Context): Long =
     val secrets = mut.ArraySeq.from(parseInput(ctx))
-    (1 to PRICE_CHANGE_COUNT).foreach: _ =>
-      for i <- 0 until secrets.length do secrets(i) = getNextSecret(secrets(i))
-    secrets.sum
+    secrets.map(Iterator.iterate(_)(getNextSecret).drop(PRICE_CHANGE_COUNT).next).sum
 
   override def part2(ctx: Context): Long =
     val secrets = parseInput(ctx)
@@ -24,10 +22,7 @@ class Day22 extends Solution:
       .toSeq
       .groupMap({ case (k, v) => k }) { case (k, v) => v }
       .mapValues(_.sum)
-      .toSeq
-      .sortBy({ case (k, v) => -v })
-      .head
-
+      .maxBy { case (k, v) => v }
     bananas
 
   type DiffSeq = Seq[Byte]
@@ -36,7 +31,7 @@ class Day22 extends Solution:
     var secret = secretStart
     val diffQueue = mut.Queue.empty[Byte]
     val diffMap = mut.Map.empty[DiffSeq, Long]
-    for it <- 1 to iterCount do
+    for _ <- 1 to iterCount do
       val nextSecret = getNextSecret(secret)
       val nextSecretDigit = (nextSecret % 10)
       val diff = (nextSecretDigit - (secret % 10)).toByte
