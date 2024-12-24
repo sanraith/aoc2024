@@ -28,7 +28,7 @@ class Day23 extends Solution:
 
   def findLargestGroup(start: Computer, minSize: Int): Option[Seq[Computer]] =
     val connections = start.connections.toSeq
-    val groupOption = Iterator
+    Iterator
       .from(connections.size, -1)
       .takeWhile(_ >= minSize)
       .map: groupSize =>
@@ -37,8 +37,7 @@ class Day23 extends Solution:
           .find: group =>
             val pairs = group.combinations(2)
             pairs.forall { case Seq(a, b) => a.connections.contains(b) }
-      .collectFirst { case Some(seq) => start +: seq }
-    groupOption
+      .collectFirst { case Some(group) => start +: group }
 
   def parseInput(ctx: Context): mut.Map[String, Computer] =
     val computers = mut.Map.empty[String, Computer]

@@ -13,7 +13,7 @@ object Util:
   val CurrentYear: Int = AppConfig.instance.eventYear
 
   private val DurationScales: Seq[(Long, String, Int)] = Seq(
-    (60_000_000_000L, "min", 2),
+    (60_000_000_000L, "m", 2),
     (1_000_000_000, "s", 3),
     (1_000_000, "ms", 0),
     (1_000, "μs", 0),
