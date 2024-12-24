@@ -9,14 +9,50 @@ class Day24 extends Solution:
 
   override def part1(ctx: Context): Long =
     val gates = parseInput(ctx)
-    val binary =
-      gates.values.filter(_.name.startsWith("z")).toSeq.sortBy(_.name).reverse.map(_.value).mkString
-    java.lang.Long.parseLong(binary, 2)
+    getNumber("z", gates)
 
   override def part2(ctx: Context): Long =
     val gates = parseInput(ctx)
+    val x = getNumber("x", gates)
+    val y = getNumber("y", gates)
+
+    val zExpected = x + y
+    val zExpectedBin =
+      zExpected.toBinaryString.reverse.padTo(32, '0').reverse.map(_.asDigit).reverse.toList
+    val zActual = getNumber("z", gates)
+    val zActualBin = getBinNumber("z", gates).reverse.toList
+
+    zActualBin.zip(zExpectedBin).zipWithIndex.collectFirst {
+      case ((a, b), i) if a != b =>
+        val idxStr = "z" + i.toString().reverse.padTo(2, '0').reverse
+        trace(idxStr, gates)
+    }
+
+    println(zActual)
+    println(zExpected)
+    println(zActualBin)
+    println(zExpectedBin)
 
     ???
+
+  def trace(name: String, gates: mut.Map[String, Gate]): Unit =
+    gates(name) match
+      case ValueGate(name, constValue, a, b) => () // println(s"${name}\n")
+      case g: Gate                           =>
+        // println(s"${g.name} <- ${g.a}, ${g.b}")
+        val gName = g.getClass.getSimpleName.replace("Gate", "").toUpperCase + " " + g.name
+        println(s"${g.a} --> ${name}[$gName]")
+        println(s"${g.b} --> ${name}[$gName]")
+
+        trace(g.a, gates)
+        trace(g.b, gates)
+
+  def getBinNumber(namePrefix: String, gates: mut.Map[String, Gate]): Seq[Int] =
+    gates.values.filter(_.name.startsWith(namePrefix)).toSeq.sortBy(_.name).reverse.map(_.value)
+
+  def getNumber(namePrefix: String, gates: mut.Map[String, Gate]): Long =
+    val binary = getBinNumber(namePrefix, gates).mkString
+    java.lang.Long.parseLong(binary, 2)
 
   def parseInput(ctx: Context): mut.Map[String, Gate] =
     val Seq(valuesStr, gatesStr) = ctx.input.split("""\R\R""").toSeq
@@ -30,19 +66,19 @@ class Day24 extends Solution:
     gates
 
   type GateValue = Int
-  trait Gate(nameIn: String):
-    val name: String = nameIn
+  trait Gate():
+    val name: String
+    val a: String
+    val b: String
     lazy val value: GateValue
     val sources: Seq[Gate] = Seq.empty
 
-  case class ValueGate(nameIn: String, constValue: GateValue) extends Gate(nameIn):
+  case class ValueGate(name: String, constValue: GateValue, a: String = "", b: String = "")
+      extends Gate:
     lazy val value = constValue
-  case class AndGate(nameIn: String, a: String, b: String, gates: mut.Map[String, Gate])
-      extends Gate(nameIn):
+  case class AndGate(name: String, a: String, b: String, gates: mut.Map[String, Gate]) extends Gate:
     lazy val value = gates(a).value & gates(b).value
-  case class OrGate(nameIn: String, a: String, b: String, gates: mut.Map[String, Gate])
-      extends Gate(nameIn):
+  case class OrGate(name: String, a: String, b: String, gates: mut.Map[String, Gate]) extends Gate:
     lazy val value = gates(a).value | gates(b).value
-  case class XorGate(nameIn: String, a: String, b: String, gates: mut.Map[String, Gate])
-      extends Gate(nameIn):
+  case class XorGate(name: String, a: String, b: String, gates: mut.Map[String, Gate]) extends Gate:
     lazy val value = gates(a).value ^ gates(b).value
