@@ -6,37 +6,18 @@ class Day24Test extends SolutionTestSpec:
   describe("Day24 for example input") {
     given day: Solution = Day24()
 
-    it("solves part 2 asdasdasd"):
-      assertPart(
-        day.part2,
-        expected = 2024,
-        input = """
-x00: 0
-x01: 1
-x02: 0
-x03: 1
-x04: 0
-x05: 1
-y00: 0
-y01: 0
-y02: 1
-y03: 1
-y04: 0
-y05: 1
-
-x00 AND y00 -> z05
-x01 AND y01 -> z02
-x02 AND y02 -> z01
-x03 AND y03 -> z03
-x04 AND y04 -> z04
-x05 AND y05 -> z00"""
-      )
-
     it("solves part 1"):
-      _assertPart(
-        day.part1,
-        expected = 2024,
-        input = """
+      assertPart(day.part1, expected = 2024, input = testInput)
+  }
+
+  describe("Day24 for puzzle input") {
+    given day: Solution = Day24()
+
+    it("solves part 1")(assertPart(day.part1, 56939028423824L))
+    it("solves part 2")(assertPart(day.part2, "frn,gmq,vtj,wnf,wtt,z05,z21,z39"))
+  }
+
+  val testInput = """
 x00: 1
 x01: 0
 x02: 1
@@ -84,19 +65,3 @@ y03 OR x01 -> nrd
 hwm AND bqk -> z03
 tgd XOR rvg -> z12
 tnw OR pbm -> gnj"""
-      )
-
-    it("solves part 2"):
-      assertPart(
-        day.part2,
-        expected = "__PART_2_TEST_EXPECTED__",
-        input = """__PART_2_TEST_INPUT__"""
-      )
-  }
-
-  describe("Day24 for puzzle input") {
-    given day: Solution = Day24()
-
-    it("solves part 1")(assertPart(day.part1, 56939028423824L))
-    it("solves part 2")(_assertPart(day.part2, "__PART_2_EXPECTED__"))
-  }
